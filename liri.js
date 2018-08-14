@@ -1,5 +1,9 @@
 require("dotenv").config();
 
+// 9. Add the code required to import the `keys.js` file and store it in a variable.
+require("/keys.js").config();
+var m = require('./keys.js');
+
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
@@ -11,7 +15,8 @@ db.connect({
 })
 
 var request = require('request');
-request('http://http://www.omdbapi.com', function (error, response, body) {
+
+request('http://www.omdbapi.com', function (error, response, body) {
   console.log('error:', error); // Print the error if one occurred
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   console.log('body:', body); // Print the HTML for the Google homepage.
@@ -19,7 +24,7 @@ request('http://http://www.omdbapi.com', function (error, response, body) {
 
 var Spotify = require('node-spotify-api');
  
-var Spotify = new Spotify({
+var spotify = new Spotify({
   id: '5adf649fd904497a9a83cbeaf258faeb',
   secret: '265404a69244407d9919e6b99cc61ab8',
 });
@@ -31,27 +36,30 @@ spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
  
 console.log(data); 
 });
-//   10. Make it so liri.js can take in one of the following commands:
 
-//     * `spotify-this-song`
+var fs = require("fs");
 
-//     * `movie-this`
+fs.readFile("random.txt"), utf8, function(error, data) {
+    if (error) {
+        return console.log(error);
+      }
 
-//     * `do-what-it-says`
+      console.log(data);
 
-// ### What Each Command Should Do
+      var dataArr = data.split(",");
 
-// 2. `node liri.js spotify-this-song '<song name here>'`
+      console.log(dataArr);
+}
 
-//    * This will show the following information about the song in your terminal/bash window
-     
-//      * Artist(s)
-     
-//      * The song's name
-     
-//      * A preview link of the song from Spotify
-     
-//      * The album that the song is from
+request("http://www.omdbapi.com", function(error, response, body) {
 
-//    * If no song is provided then your program will default to "The Sign" by Ace of Base.
-   
+  // If the request was successful...
+  if (!error && response.statusCode === 200) {
+
+    // Then log the body from the site!
+    console.log(body);
+  }
+});
+
+
+
